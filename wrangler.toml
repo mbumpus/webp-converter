@@ -1,0 +1,7 @@
+name = "webp-converter"
+compatibility_date = "2025-10-26"
+
+[assets]
+directory = "."
+
+# Static site - no build needed, just serve files from root
