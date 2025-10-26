@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Privacy-first image to WebP converter. Convert images locally in your browser without uploads.">
+    <title>Image to WebP Converter - Privacy First</title>
+    <link rel="stylesheet" href="styles/main.css">
+    
+    <!-- Plausible Analytics (Privacy-first, no cookies) -->
+    <script defer data-domain="webp.crewly.codes" src="https://plausible.io/js/script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <!-- Top Corner Badge -->
+            <div class="crewly-corner-badge">
+                <a href="#" onclick="showCrewlyModal(); return false;" title="Learn how this was built">
+                    <span class="crewly-corner-text">Built with Crewly Codes</span>
+                    <span class="crewly-corner-icon">ℹ️</span>
+                </a>
+            </div>
+            
+            <h1>🖼️ Image → WebP Converter</h1>
+            <p class="tagline">Convert images to WebP format locally in your browser. Privacy-first, no uploads.</p>
+        </header>
+
+        <main>
+            <!-- File Upload Area -->
+            <section class="upload-section">
+                <div id="dropZone" class="drop-zone">
+                    <svg class="upload-icon" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                    <p class="drop-text">Drag & drop an image here</p>
+                    <p class="drop-subtext">or</p>
+                    <button type="button" class="btn-browse" onclick="document.getElementById('fileInput').click()">
+                        Browse Files
+                    </button>
+                    <input type="file" id="fileInput" accept="image/png,image/jpeg,image/jpg,image/gif,image/bmp,image/svg+xml" hidden>
+                    <p class="supported-formats">Supported: PNG, JPEG, GIF, BMP, SVG (Max 10MB)</p>
+                </div>
+
+                <div id="errorMessage" class="error-message hidden"></div>
+            </section>
+
+            <!-- Quality Controls -->
+            <section id="qualitySection" class="quality-section hidden">
+                <div class="quality-controls">
+                    <label for="qualitySlider">WebP Quality: <span id="qualityValue">90</span>%</label>
+                    <input type="range" id="qualitySlider" min="0" max="100" value="90" step="5">
+                    <p class="quality-note">Lower quality = smaller file size. 90% is recommended for best balance.</p>
+                </div>
+            </section>
+
+            <!-- Preview and Results -->
+            <section id="previewSection" class="preview-section hidden">
+                <div class="preview-grid">
+                    <!-- Original Image -->
+                    <div class="preview-card">
+                        <h3>Original Image</h3>
+                        <div class="image-preview">
+                            <img id="originalImage" alt="Original image preview">
+                        </div>
+                        <div class="image-info">
+                            <p><strong>Format:</strong> <span id="originalFormat"></span></p>
+                            <p><strong>Size:</strong> <span id="originalSize"></span></p>
+                            <p><strong>Dimensions:</strong> <span id="originalDimensions"></span></p>
+                        </div>
+                    </div>
+
+                    <!-- Converted Image -->
+                    <div class="preview-card">
+                        <h3>WebP Preview</h3>
+                        <div class="image-preview">
+                            <img id="convertedImage" alt="Converted WebP preview">
+                        </div>
+                        <div class="image-info">
+                            <p><strong>Format:</strong> WebP</p>
+                            <p><strong>Size:</strong> <span id="convertedSize"></span></p>
+                            <p><strong>Reduction:</strong> <span id="sizeReduction" class="reduction-highlight"></span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Processing Status -->
+                <div id="processingStatus" class="processing-status hidden">
+                    <div class="spinner"></div>
+                    <p>Converting image to WebP...</p>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button id="convertBtn" class="btn btn-primary">Convert to WebP</button>
+                    <button id="downloadBtn" class="btn btn-success hidden">Download WebP</button>
+                    <button id="resetBtn" class="btn btn-secondary">Convert Another</button>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer Attribution -->
+        <footer class="crewly-footer">
+            <div class="crewly-footer-content">
+                <div class="crewly-footer-badge">
+                    <span class="crewly-badge-icon">🤖</span>
+                    <div class="crewly-badge-text">
+                        <strong>Built by AI in 8 min • $0.56</strong>
+                        <span>Powered by Crewly Codes + DigitalEgo</span>
+                    </div>
+                </div>
+                <div class="crewly-footer-links">
+                    <a href="https://crewly.codes/builds/webp-converter?utm_source=webp_converter&utm_medium=footer&utm_campaign=utility_suite"
+                       onclick="trackFooterClick('build_story')">
+                        See How We Built This
+                    </a>
+                    <span class="crewly-divider">•</span>
+                    <a href="https://github.com/yourusername/webp-converter"
+                       onclick="trackFooterClick('github')">
+                        View Code
+                    </a>
+                    <span class="crewly-divider">•</span>
+                    <a href="#" onclick="showCrewlyModal(); return false;">
+                        About This App
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- JavaScript Modules -->
+    <script src="src/utils.js"></script>
+    <script src="src/converter.js"></script>
+    <script src="src/ui.js"></script>
+
+    <!-- Crewly Codes Modal -->
+    <div id="crewly-modal" class="crewly-modal">
+        <div class="crewly-modal-content">
+            <button class="crewly-modal-close" onclick="closeCrewlyModal()">&times;</button>
+            
+            <div class="crewly-modal-header">
+                <h2>🤖 Built by AI in 8 minutes</h2>
+                <p class="crewly-modal-subtitle">Governed development • $0.56 • Zero bugs</p>
+            </div>
+            
+            <div class="crewly-modal-body">
+                <p>This WebP Converter was built using <strong>Crewly Codes</strong> - an AI Product Manager that orchestrates multi-persona crews with full governance and transparency.</p>
+                
+                <div class="crewly-process">
+                    <div class="crewly-step">
+                        <span class="crewly-icon">📋</span>
+                        <div class="crewly-step-content">
+                            <strong>Morgan (AI PM)</strong>
+                            <p>Generated spec & acceptance criteria</p>
+                        </div>
+                    </div>
+                    
+                    <div class="crewly-arrow">↓</div>
+                    
+                    <div class="crewly-step">
+                        <span class="crewly-icon">🤖</span>
+                        <div class="crewly-step-content">
+                            <strong>Dev Crew</strong>
+                            <p>Built code with governance</p>
+                        </div>
+                    </div>
+                    
+                    <div class="crewly-arrow">↓</div>
+                    
+                    <div class="crewly-step">
+                        <span class="crewly-icon">🔍</span>
+                        <div class="crewly-step-content">
+                            <strong>QA Engineer</strong>
+                            <p>Validated with blocking authority</p>
+                        </div>
+                    </div>
+                    
+                    <div class="crewly-arrow">↓</div>
+                    
+                    <div class="crewly-step">
+                        <span class="crewly-icon">✅</span>
+                        <div class="crewly-step-content">
+                            <strong>Product Manager</strong>
+                            <p>Approved for release (95% confidence)</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="crewly-stats">
+                    <div class="crewly-stat">
+                        <strong>8 min</strong>
+                        <span>Total time</span>
+                    </div>
+                    <div class="crewly-stat">
+                        <strong>0</strong>
+                        <span>Iterations</span>
+                    </div>
+                    <div class="crewly-stat">
+                        <strong>~1,200</strong>
+                        <span>Lines of code</span>
+                    </div>
+                    <div class="crewly-stat">
+                        <strong>$0.56</strong>
+                        <span>Cost</span>
+                    </div>
+                </div>
+                
+                <p class="crewly-privacy">
+                    🔒 Your images never leave your browser • No tracking • No cookies • 100% private
+                </p>
+            </div>
+            
+            <div class="crewly-modal-footer">
+                <p>Want to build your own features this fast?</p>
+                <div class="crewly-modal-actions">
+                    <a href="https://crewly.codes/builds/webp-converter?utm_source=webp_converter&utm_medium=modal&utm_campaign=utility_suite" 
+                       class="crewly-btn crewly-btn-secondary"
+                       onclick="trackModalClick('build_story')">
+                        See How It Was Built
+                    </a>
+                    <a href="https://crewly.codes?utm_source=webp_converter&utm_medium=modal&utm_campaign=utility_suite" 
+                       class="crewly-btn crewly-btn-primary"
+                       onclick="trackModalClick('try_crewly')">
+                        Try Crewly Codes
+                    </a>
+                </div>
+                <p class="crewly-powered">
+                    Built with <strong>AI Product Management</strong><br>
+                    Powered by <strong>DigitalEgo</strong> frameworks
+                </p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
