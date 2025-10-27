@@ -25,7 +25,7 @@ const ImageConverter = {
         const isSupported = await Utils.checkWebPSupport();
         
         if (!isSupported) {
-            UI.showError('Your browser does not support WebP format. Please use a modern browser like Chrome, Firefox, or Edge.');
+            UI.showError('WebP conversion requires Chrome, Firefox, or Edge. Safari users: Please update to Safari 16+ or use Chrome for this tool.');
             return false;
         }
         
