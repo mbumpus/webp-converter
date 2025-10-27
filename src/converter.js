@@ -18,17 +18,12 @@ const ImageConverter = {
     },
 
     /**
-     * Initialize converter and check browser support
+     * Initialize converter
      * @returns {Promise<boolean>} - True if initialization successful
      */
     async init() {
-        const isSupported = await Utils.checkWebPSupport();
-        
-        if (!isSupported) {
-            UI.showError('WebP conversion requires Chrome, Firefox, or Edge. Safari users: Please update to Safari 16+ or use Chrome for this tool.');
-            return false;
-        }
-        
+        // Skip browser check - we'll handle errors at conversion time if needed
+        console.log('Image converter initialized');
         return true;
     },
 
