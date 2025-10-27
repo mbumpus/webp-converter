@@ -149,14 +149,35 @@ const Utils = {
      */
     checkWebPSupport() {
         return new Promise((resolve) => {
+            // Simple sync check first - most reliable
+            const elem = document.createElement('canvas');
+            if (elem.getContext && elem.getContext('2d')) {
+                // Check if toDataURL supports webp
+                const supportsWebP = elem.toDataURL('image/webp').indexOf('data:image/webp') === 0;
+                
+                if (supportsWebP) {
+                    console.log('WebP supported (sync check)');
+                    resolve(true);
+                    return;
+                }
+            }
+            
+            // Fallback to async blob check with timeout
+            const timeout = setTimeout(() => {
+                console.warn('WebP check timed out, assuming no support');
+                resolve(false);
+            }, 2000);
+            
             const canvas = document.createElement('canvas');
             canvas.width = 1;
             canvas.height = 1;
             
-            // Try to convert to WebP
             canvas.toBlob(
                 (blob) => {
-                    resolve(blob !== null && blob.type === 'image/webp');
+                    clearTimeout(timeout);
+                    const isSupported = blob !== null && blob.type === 'image/webp';
+                    console.log('WebP support check (async):', isSupported);
+                    resolve(isSupported);
                 },
                 'image/webp'
             );
