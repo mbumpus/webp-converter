@@ -157,20 +157,6 @@ Traditional AI coding tools run autonomously and hope for the best. Crewly Codes
 
 ---
 
-## 🌟 The "Built with Crewly Codes" Badge
-
-Want to build utilities like this?
-
-This app features:
-- **Post-engagement modal** - Shows build story after first conversion
-- **Corner badge** - Subtle branding with info link
-- **Footer attribution** - Links to build story and source code
-- **Privacy-first analytics** - Optional Plausible integration (no cookies)
-
-All designed to be **informative, not intrusive**.
-
----
-
 ## 📝 License
 
 MIT License - feel free to use, modify, and distribute
@@ -179,10 +165,9 @@ MIT License - feel free to use, modify, and distribute
 
 ## 🔗 Links
 
-- **Live Demo:** [webp.crewly.codes](https://webp.crewly.codes)
-- **Build Story:** [How we built this](https://crewly.codes/builds/webp-converter)
+- **Live Demo:** [builtwith.crewly.codes/webp](https://builtwith.crewly.codes/webp/)
 - **Crewly Codes:** [Try the platform](https://crewly.codes)
-- **DigitalEgo:** [Learn about the frameworks](https://digitalego.dev)
+- **DigitalEgo:** [Learn about the frameworks](https://digitalego.ai)
 
 ---
 
@@ -191,11 +176,9 @@ MIT License - feel free to use, modify, and distribute
 Want to learn more about governed AI development or build your own utilities?
 
 - **Try Crewly Codes:** [crewly.codes](https://crewly.codes)
-- **Read the docs:** [docs.crewly.codes](https://docs.crewly.codes)
-- **Follow updates:** [@CrewlyCodes](https://twitter.com/CrewlyCodes)
 
 ---
 
 **Built with AI Product Management** • **Powered by DigitalEgo frameworks**
 
-*Part of the "12 Utilities in 12 Weeks" series - proving governed AI development ships quality software faster than traditional methods.*
+
