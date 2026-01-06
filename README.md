@@ -8,7 +8,7 @@ Convert images to WebP format in your browser. Privacy-first, client-side only, 
 
 ## 🚀 Try It Live
 
-👉 **[builtwith.crewly.codes/webp](https://builtwith.crewly.codes/webp/))**
+👉 **[builtwith.crewly.codes/webp](https://builtwith.crewly.codes/webp/)**
 
 ---
 
